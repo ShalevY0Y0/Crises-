@@ -1,5 +1,5 @@
-// src/components/HostForm.js
 import React, { useState } from 'react';
+import './HostForm.css';
 
 const HostForm = ({ addHost }) => {
   const [formData, setFormData] = useState({
@@ -28,26 +28,55 @@ const HostForm = ({ addHost }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h2>Host Registration</h2>
-      <label>
-        Name:
-        <input type="text" name="name" value={formData.name} onChange={handleChange} required />
-      </label>
-      <label>
-       city:
-        <input type="text" name="city" value={formData.city} onChange={handleChange} required />
-      </label>
-      <label>
-        Max Guests:
-        <input type="number" name="maxGuests" value={formData.maxGuests} onChange={handleChange} required />
-      </label>
-      <label>
-        Requirements:
-        <textarea name="requirements" value={formData.requirements} onChange={handleChange} required />
-      </label>
-      <button type="submit">Submit</button>
-    </form>
+    <div className="form-container">
+      <form onSubmit={handleSubmit} className="form">
+        <h2 className="form-heading">Host Registration</h2>
+        <label className="form-label">
+          Name:
+          <input
+            type="text"
+            name="name"
+            value={formData.name}
+            onChange={handleChange}
+            className="form-input"
+            required
+          />
+        </label>
+        <label className="form-label">
+          City:
+          <input
+            type="text"
+            name="city"
+            value={formData.city}
+            onChange={handleChange}
+            className="form-input"
+            required
+          />
+        </label>
+        <label className="form-label">
+          Max Guests:
+          <input
+            type="number"
+            name="maxGuests"
+            value={formData.maxGuests}
+            onChange={handleChange}
+            className="form-input"
+            required
+          />
+        </label>
+        <label className="form-label">
+          Requirements:
+          <textarea
+            name="requirements"
+            value={formData.requirements}
+            onChange={handleChange}
+            className="form-textarea"
+            required
+          />
+        </label>
+        <button type="submit" className="form-button">Submit</button>
+      </form>
+    </div>
   );
 };
 

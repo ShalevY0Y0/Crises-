@@ -1,19 +1,12 @@
-// src/components/GuestForm.js
 import React, { useState } from 'react';
-import axios from 'axios'
+import './GuestForm.css';
 
 const GuestForm = ({ addGuest }) => {
   const [formData, setFormData] = useState({
     name: '',
     city: '',
-    guests: 1,
-    needs: ''
+    requirements: ''
   });
-
-  const sendDataToBackend = async (obje) => {
-    const response = await axios.post("http://127.0.0.1:5000/GuestData", {...obje})
-    console.log(response)
-  }
 
   const handleChange = (e) => {
     setFormData({
@@ -24,38 +17,53 @@ const GuestForm = ({ addGuest }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    sendDataToBackend(formData);
-    console.log(formData);
     addGuest(formData);
     setFormData({
       name: '',
       city: '',
-      guests: 1,
-      needs: ''
+      requirements: ''
     });
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h2>Guest Registration</h2>
-      <label>
-        Name:
-        <input type="text" name="name" value={formData.name} onChange={handleChange} required />
-      </label>
-      <label>
-        city:
-        <input type="text" name="city" value={formData.city} onChange={handleChange} required />
-      </label>
-      <label>
-        Number of Guests:
-        <input type="number" name="guests" value={formData.guests} onChange={handleChange} required />
-      </label>
-      <label>
-        Needs:
-        <textarea name="needs" value={formData.needs} onChange={handleChange} required />
-      </label>
-      <button type="submit" >Submit</button>
-    </form>
+    <div className="form-container">
+      <form onSubmit={handleSubmit} className="form">
+        <h2 className="form-heading">Guest Registration</h2>
+        <label className="form-label">
+          Name:
+          <input
+            type="text"
+            name="name"
+            value={formData.name}
+            onChange={handleChange}
+            className="form-input"
+            required
+          />
+        </label>
+        <label className="form-label">
+          City:
+          <input
+            type="text"
+            name="city"
+            value={formData.city}
+            onChange={handleChange}
+            className="form-input"
+            required
+          />
+        </label>
+        <label className="form-label">
+          Requirements:
+          <textarea
+            name="requirements"
+            value={formData.requirements}
+            onChange={handleChange}
+            className="form-textarea"
+            required
+          />
+        </label>
+        <button type="submit" className="form-button">Submit</button>
+      </form>
+    </div>
   );
 };
 
