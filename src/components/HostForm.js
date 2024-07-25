@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
 import './HostForm.css';
+import axios from 'axios'
 
 const HostForm = ({ addHost }) => {
   const [formData, setFormData] = useState({
-    name: '',
+    id: '',
+    first_name: '',
+    last_name: '',
     city: '',
-    maxGuests: 1,
+    max_guests: 1,
     requirements: ''
   });
 
@@ -16,13 +19,22 @@ const HostForm = ({ addHost }) => {
     });
   };
 
+  const sendDataToBackend = async (obje) => {
+    const response = await axios.post("http://127.0.0.1:5000/HostData", {...obje})
+    console.log(response.data)
+  }
+
   const handleSubmit = (e) => {
     e.preventDefault();
+    sendDataToBackend(formData);
+    console.log(formData);
     addHost(formData);
     setFormData({
-      name: '',
+      id: '',
+      first_name: '',
+      last_name: '',
       city: '',
-      maxGuests: 1,
+      max_guests: 1,
       requirements: ''
     });
   };
@@ -32,11 +44,33 @@ const HostForm = ({ addHost }) => {
       <form onSubmit={handleSubmit} className="form">
         <h2 className="form-heading">Host Registration</h2>
         <label className="form-label">
-          Name:
+          ID:
           <input
             type="text"
-            name="name"
-            value={formData.name}
+            name="id"
+            value={formData.id}
+            onChange={handleChange}
+            className="form-input"
+            required
+          />
+        </label>
+        <label className="form-label">
+          First_Name:
+          <input
+            type="text"
+            name="first_name"
+            value={formData.first_name}
+            onChange={handleChange}
+            className="form-input"
+            required
+          />
+        </label>
+        <label className="form-label">
+          Last_Name:
+          <input
+            type="text"
+            name="last_name"
+            value={formData.last_name}
             onChange={handleChange}
             className="form-input"
             required
@@ -57,8 +91,8 @@ const HostForm = ({ addHost }) => {
           Max Guests:
           <input
             type="number"
-            name="maxGuests"
-            value={formData.maxGuests}
+            name="max_guests"
+            value={formData.max_guests}
             onChange={handleChange}
             className="form-input"
             required
