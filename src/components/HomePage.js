@@ -15,7 +15,9 @@ const HomePage = () => {
 
   return (
     <div className="home-container">
-      <h1 className="home-heading">Welcome to Crisis Tech</h1>
+            <img src={"evacu_logo.jpg"} style={{ width: '300px', height: '300px', marginBottom: '30px' }}/>
+      <h1 className="home-heading">Welcome to EvacU
+      </h1>
       <div className="options-container">
         <div className="option-card" onClick={handleHostClick}>
           <h2>Host</h2>
