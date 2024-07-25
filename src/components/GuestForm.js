@@ -1,5 +1,6 @@
 // src/components/GuestForm.js
 import React, { useState } from 'react';
+import axios from 'axios'
 
 const GuestForm = ({ addGuest }) => {
   const [formData, setFormData] = useState({
@@ -8,6 +9,11 @@ const GuestForm = ({ addGuest }) => {
     guests: 1,
     needs: ''
   });
+
+  const sendDataToBackend = async (obje) => {
+    const response = await axios.post("http://127.0.0.1:5000/GuestData", {...obje})
+    console.log(response)
+  }
 
   const handleChange = (e) => {
     setFormData({
@@ -18,6 +24,8 @@ const GuestForm = ({ addGuest }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    sendDataToBackend(formData);
+    console.log(formData);
     addGuest(formData);
     setFormData({
       name: '',
@@ -46,7 +54,7 @@ const GuestForm = ({ addGuest }) => {
         Needs:
         <textarea name="needs" value={formData.needs} onChange={handleChange} required />
       </label>
-      <button type="submit">Submit</button>
+      <button type="submit" >Submit</button>
     </form>
   );
 };
